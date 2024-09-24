@@ -52,7 +52,7 @@ public class Oui : MonoBehaviour
         transform.parent.Rotate(rotation);
     }
 
-
+    //SImon est beau
     public void GetTeta(InputAction.CallbackContext context)
     {
         inputMovement = context.ReadValue<Vector2>();
