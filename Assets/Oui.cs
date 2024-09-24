@@ -16,6 +16,9 @@ public class Oui : MonoBehaviour
     private float deltaTeta;
     private Vector3 rotation;
     [SerializeField] private float speedAcceleration;
+    private float adherance;
+    [SerializeField] private bool groundTestRaycast;
+    [SerializeField] private float maxteta;
 
 
 
@@ -32,14 +35,24 @@ public class Oui : MonoBehaviour
     void Update()
     {
         // V
-
         //rb.velocity += (acceleration - deceleration) * speedAcceleration * (transform.forward + directionInput);
         //if adhérence
-        if (rb.velocity.magnitude > maxSpeed && (acceleration>0 || deceleration >0))
+        int layerMask = 1 << 6;
+        groundTestRaycast = Physics.Raycast(transform.position, -Vector2.up, 2, ~layerMask);
+        if (groundTestRaycast)
+        {
+            rouleAuSol();
+        }
+
+    }
+
+    private void rouleAuSol()
+    {
+        if (rb.velocity.magnitude > maxSpeed && (acceleration > 0 || deceleration > 0))
         {
             //rb.velocity = rb.velocity;
         }
-        else 
+        else
             rb.velocity = (Vector3.Dot(rb.velocity, transform.forward) + (acceleration - deceleration) * speedAcceleration) * transform.forward + Vector3.Dot(rb.velocity, transform.up) * transform.up;
         //Debug.Log("velocité = " +rb.velocity);
 
@@ -49,7 +62,7 @@ public class Oui : MonoBehaviour
         deltaTeta = rb.velocity.magnitude * Mathf.Pow(Mathf.Sin(teta * Mathf.Deg2Rad), 1) * inputMovement.magnitude * Time.deltaTime / (2 * Mathf.PI * transform.localScale.z); // 3 = longueur voiture
         rotation = new Vector3(0, deltaTeta * Mathf.Rad2Deg, 0);
         //Debug.Log("rotation =  " + rotation);
-        transform.parent.Rotate(rotation);
+        transform.Rotate(rotation);
     }
 
     //SImon est beau
@@ -69,6 +82,11 @@ public class Oui : MonoBehaviour
         Debug.Log( "joystick = " +inputMovement);
 
         teta = Vector3.SignedAngle(Vector3.forward, directionInput, Vector3.up);
+        
+        if (teta > maxteta)
+            teta = maxteta;
+        else if (teta < -maxteta)
+            teta = -maxteta;
         //Debug.Log( "teta = " +teta);
     }
 
@@ -78,7 +96,7 @@ public class Oui : MonoBehaviour
         acceleration = context.ReadValue<float>();
 
 
-        //Debug.Log("a = "  + acceleration);
+        Debug.Log("a = "  + acceleration);
     }
 
     public void Deceleration(InputAction.CallbackContext context)

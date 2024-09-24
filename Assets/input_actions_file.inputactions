@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "TurnRed",
+                    "name": "B",
                     "type": "Button",
                     "id": "809493ec-3d79-46f8-ad0e-74b09779f691",
                     "expectedControlType": "Button",
@@ -24,7 +24,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "TurnBlue",
+                    "name": "X",
                     "type": "Button",
                     "id": "d7c8faab-5c85-43b0-9301-ca9b1cf104d5",
                     "expectedControlType": "Button",
@@ -33,7 +33,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "TurnGreen",
+                    "name": "A",
                     "type": "Button",
                     "id": "575f69f2-48b5-4cd8-b743-87765dbea287",
                     "expectedControlType": "Button",
@@ -42,7 +42,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "TurnYellow",
+                    "name": "Y",
                     "type": "Button",
                     "id": "81130d67-b412-473a-87fa-7f733ff36a9c",
                     "expectedControlType": "Button",
@@ -229,7 +229,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "TurnYellow",
+                    "action": "Y",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -240,7 +240,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "TurnGreen",
+                    "action": "A",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -251,7 +251,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "TurnBlue",
+                    "action": "X",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -262,7 +262,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "TurnRed",
+                    "action": "B",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
