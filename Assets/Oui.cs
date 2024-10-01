@@ -64,7 +64,10 @@ public class Oui : MonoBehaviour
 
     private void Move()
     {
-        omega = omegafactor*rb.velocity.magnitude * Mathf.Sin(teta * Mathf.Deg2Rad) * inputMovement.magnitude  / (2 * Mathf.PI * transform.localScale.z); // 3 = longueur voiture
+        omega = omegafactor*rb.velocity.magnitude * Mathf.Pow(Mathf.Sin(teta * Mathf.Deg2Rad),1) * inputMovement.magnitude  / (2 * Mathf.PI * transform.localScale.z); // 3 = longueur voiture
+        if (Vector3.Dot(rb.velocity, transform.forward)<0){
+            omega = -omega;
+        }
         
         rb.angularVelocity = new Vector3(rb.angularVelocity.x,omega*adherence + rb.angularVelocity.y*(1- adherence),0   );
         Debug.Log(rb.angularVelocity.y);
@@ -104,7 +107,7 @@ public class Oui : MonoBehaviour
         direction = inputMovement;
 
         float angle = Mathf.Deg2Rad*Vector3.Angle(transform.forward, inputMovement);
-        Debug.Log(Vector3.Angle(transform.forward, inputMovement));
+        //Debug.Log(Vector3.Angle(transform.forward, inputMovement));
     }
 
     public void Rotation(InputAction.CallbackContext context)
@@ -138,7 +141,7 @@ public class Oui : MonoBehaviour
     {
         deceleration = context.ReadValue<float>();
         if (context.started && rb.velocity.magnitude > derapageSpeed){
-            Debug.Log("derape");
+            //Debug.Log("derape");
             adherence = OriginalAdherence/2;
             derape = true;
         }
@@ -148,6 +151,11 @@ public class Oui : MonoBehaviour
             adherence = OriginalAdherence;
         }
         //Debug.Log( "d = " +deceleration);
+    }
+
+    public void Boost(InputAction.CallbackContext context){
+        float boost = context.ReadValue<float>();
+        Debug.Log(boost);
     }
 
 
