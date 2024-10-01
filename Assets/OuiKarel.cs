@@ -4,45 +4,43 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class OuiKarel : MonoBehaviour
 {   
-    [SerializeField] private float maxSpeed;
-    [SerializeField] private float derapageSpeed;
 
-    [SerializeField] private float pertesMoteurCoef;
-    private bool derape;
+    // voiture
     [SerializeField] Rigidbody rb;
 
-    private Gamepad gamepad;
+    //Moteur 
+    [SerializeField] private float maxSpeed;
+    [SerializeField] private float derapageSpeed;
+    [SerializeField] private float pertesMoteurCoef;
+    [SerializeField] private float speedAcceleration;
+
+    // Inputs
     private float acceleration;
     private float deceleration;
     private float teta;
-    private float omega;
-    [SerializeField] private float omegafactor;
-    private Vector3 rotation;
-    [SerializeField] private float speedAcceleration;
-    [SerializeField] private float adherence;
-    [SerializeField] private float OriginalAdherence;
-    [SerializeField] private bool groundTestRaycast;
-    [SerializeField] private float maxteta;
-
-    private float auSol;
-
-
     private Vector3 direction;
     private Vector3 directionInput;
     private Vector3 inputMovement;
 
+    // Frottements
+    private bool derape;
+    [SerializeField] private float adherence;
+    [SerializeField] private float OriginalAdherence;
     [SerializeField] private float frottement;
 
+    // Tourner
+    private float omega;
+    [SerializeField] private float omegafactor;
+    private Vector3 rotation;
+    [SerializeField] private float maxteta;
 
-    void Start (){
-        gamepad = Gamepad.current;
-    }
-
-
+    // Grounded?
+    [SerializeField] private bool groundTestRaycast;
+    
+    private float auSol;
 
     void Update()
     {
-
         int layerMask = 1 << 6;
         groundTestRaycast = Physics.Raycast(transform.position, -Vector2.up, 2, ~layerMask);
         if (groundTestRaycast)
@@ -56,17 +54,16 @@ public class OuiKarel : MonoBehaviour
             adherence =0;
             auSol =0;
         }
-
-
         Move();
-
     }
 
+    // Movement
     private void Move()
     {
-        omega = omegafactor*rb.velocity.magnitude * Mathf.Sin(teta * Mathf.Deg2Rad) * inputMovement.magnitude  / (2 * Mathf.PI * transform.localScale.z); // 3 = longueur voiture
-        
+        omega = omegafactor*rb.velocity.magnitude * Mathf.Sin(teta * Mathf.Deg2Rad) * inputMovement.magnitude  / (2 * Mathf.PI * transform.localScale.z);
         rb.angularVelocity = new Vector3(rb.angularVelocity.x, omega*adherence + rb.angularVelocity.y*(1- adherence), rb.angularVelocity.z);
+
+
         Vector3 eulerRotation = transform.rotation.eulerAngles; 
         transform.rotation = Quaternion.Euler(eulerRotation.x, eulerRotation.y, 0);
 
@@ -87,6 +84,7 @@ public class OuiKarel : MonoBehaviour
         }
     }
 
+    // Inputs
     public void Rotation(InputAction.CallbackContext context)
     {
         inputMovement = context.ReadValue<Vector2>();
@@ -116,7 +114,7 @@ public class OuiKarel : MonoBehaviour
         deceleration = context.ReadValue<float>();
         if (context.started && rb.velocity.magnitude > derapageSpeed){
             Debug.Log("derape");
-            adherence = 0;
+            adherence = 0.1f;
             derape = true;
         }
 

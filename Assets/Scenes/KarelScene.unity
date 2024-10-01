@@ -2330,12 +2330,12 @@ MonoBehaviour:
   derapageSpeed: 20
   pertesMoteurCoef: -1
   rb: {fileID: 740525976}
-  omegafactor: 0.8
+  omegafactor: 0.7
   speedAcceleration: 80
   adherence: 1
   OriginalAdherence: 1
   groundTestRaycast: 0
-  maxteta: 60
+  maxteta: 50
   frottement: -1
 --- !u!1001 &741710727
 PrefabInstance:
@@ -5465,31 +5465,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db5afbe8ff706db4d823f57f1638555e, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6971453
+      value: -0.001522553
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db5afbe8ff706db4d823f57f1638555e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.9948154
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db5afbe8ff706db4d823f57f1638555e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.71692985
+      value: -0.021208134
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db5afbe8ff706db4d823f57f1638555e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.09945025
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db5afbe8ff706db4d823f57f1638555e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 0.068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db5afbe8ff706db4d823f57f1638555e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 91.603
+      value: 168.584
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db5afbe8ff706db4d823f57f1638555e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 182.436
       objectReference: {fileID: 0}
     - target: {fileID: -8196953523276413604, guid: db5afbe8ff706db4d823f57f1638555e, type: 3}
       propertyPath: m_Layer
