@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class OuiKarel : MonoBehaviour
+public class MovementManager : MonoBehaviour
 {   
-
+    [Header("VOITURE")]
     // voiture
     [SerializeField] Rigidbody rb;
 
+    [Header("MOTEUR")]
     //Moteur 
     [SerializeField] private float maxSpeed;
     [SerializeField] private float pertesMoteurCoef;
@@ -21,18 +22,22 @@ public class OuiKarel : MonoBehaviour
     private Vector3 directionInput;
     private Vector3 inputMovement;
 
+    [Header("DERAPAGE")]
     // Derapage
     private bool derape;
     [SerializeField] private float derapageSpeedBoost;
     [SerializeField] private float derapageMinSpeed;
     [SerializeField] private float adhDerapage;
+    [SerializeField] private float longDerapageTimer;
+    private bool longDerapage;
 
+    [Header("Frottements")]
     // Frottements
-
     [SerializeField] private float adherence;
     [SerializeField] private float OriginalAdherence;
     [SerializeField] private float frottement;
 
+    [Header("Rotation")]
     // Tourner
     private float omega;
     [SerializeField] private float omegafactor;
@@ -40,7 +45,7 @@ public class OuiKarel : MonoBehaviour
     [SerializeField] private float maxteta;
 
     // Grounded?
-    [SerializeField] private bool groundTestRaycast;
+    private bool groundTestRaycast;
     
     private float auSol;
 
@@ -65,13 +70,20 @@ public class OuiKarel : MonoBehaviour
     // Movement
     private void Move()
     {
+        if (derape) {
+            //si on veut pimp le dérapage
+
+        }
+
+        // Angle
         omega = omegafactor*rb.velocity.magnitude * Mathf.Sin(teta * Mathf.Deg2Rad) * inputMovement.magnitude  / (2 * Mathf.PI * transform.localScale.z);
         rb.angularVelocity = new Vector3(rb.angularVelocity.x, omega*adherence + rb.angularVelocity.y*(1- adherence), rb.angularVelocity.z);
 
-
+        // Pas d'histoire de rotation en z et ça évite d'etre bloqué à l'envers 
         Vector3 eulerRotation = transform.rotation.eulerAngles; 
         transform.rotation = Quaternion.Euler(eulerRotation.x, eulerRotation.y, 0);
 
+        // Vitesse
         float motorAccel = (acceleration - deceleration) * speedAcceleration*Time.deltaTime;
 
         Vector3 composantMoteurForward = (motorAccel)* transform.forward;
@@ -87,6 +99,10 @@ public class OuiKarel : MonoBehaviour
         if (rb.velocity.magnitude > maxSpeed){
             rb.velocity = rb.velocity.normalized*maxSpeed;
         }
+
+
+        Debug.Log("frottements:" + Frottements);
+        Debug.Log("adh * pertesmoteur:" + adherence*pertesMoteur);
     }
 
     // Inputs
@@ -121,17 +137,24 @@ public class OuiKarel : MonoBehaviour
             Debug.Log("derape");
             adherence = adhDerapage;
             derape = true;
+            StartCoroutine("IsItALongDerapage");
         }
 
         if (context.canceled) {
 
-            if (derape){
-                rb.velocity+= transform.forward*derapageSpeedBoost;
-                Debug.Log("boostGiven");
+            if (longDerapage){
+                rb.velocity+= transform.forward*derapageSpeedBoost*auSol;
             }
             derape = false;
 
             adherence = OriginalAdherence;
+        }
+    }
+
+    private IEnumerator IsItALongDerapage(){
+        yield return new WaitForSeconds(longDerapageTimer);
+        if (derape){
+            longDerapage = true;
         }
     }
 }
