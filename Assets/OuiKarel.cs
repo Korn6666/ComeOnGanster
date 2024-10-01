@@ -10,7 +10,6 @@ public class OuiKarel : MonoBehaviour
 
     //Moteur 
     [SerializeField] private float maxSpeed;
-    [SerializeField] private float derapageSpeed;
     [SerializeField] private float pertesMoteurCoef;
     [SerializeField] private float speedAcceleration;
 
@@ -22,8 +21,13 @@ public class OuiKarel : MonoBehaviour
     private Vector3 directionInput;
     private Vector3 inputMovement;
 
-    // Frottements
+    // Derapage
     private bool derape;
+    [SerializeField] private float derapageSpeedBoost;
+    [SerializeField] private float derapageMinSpeed;
+
+    // Frottements
+
     [SerializeField] private float adherence;
     [SerializeField] private float OriginalAdherence;
     [SerializeField] private float frottement;
@@ -112,14 +116,20 @@ public class OuiKarel : MonoBehaviour
     public void Deceleration(InputAction.CallbackContext context)
     {
         deceleration = context.ReadValue<float>();
-        if (context.started && rb.velocity.magnitude > derapageSpeed){
+        if (context.started && rb.velocity.magnitude > derapageMinSpeed){
             Debug.Log("derape");
-            adherence = 0.1f;
+            adherence = 0;
             derape = true;
         }
 
         if (context.canceled) {
+
+            if (derape){
+                rb.velocity+= transform.forward*derapageSpeedBoost;
+                Debug.Log("boostGiven");
+            }
             derape = false;
+
             adherence = OriginalAdherence;
         }
     }

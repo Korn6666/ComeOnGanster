@@ -279,6 +279,17 @@
                 },
                 {
                     "name": "",
+                    "id": "aeb3b56f-a08f-4a54-baa1-0f84c648f7d9",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Frein",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "f0358019-ccff-4bfe-84fe-6a66aa265134",
                     "path": "<Keyboard>/w",
                     "interactions": "",
