@@ -66,7 +66,7 @@ public class OuiKarel : MonoBehaviour
     {
         omega = omegafactor*rb.velocity.magnitude * Mathf.Sin(teta * Mathf.Deg2Rad) * inputMovement.magnitude  / (2 * Mathf.PI * transform.localScale.z); // 3 = longueur voiture
         
-        rb.angularVelocity = new Vector3(rb.angularVelocity.x, omega*adherence + rb.angularVelocity.y*(1- adherence), 0);
+        rb.angularVelocity = new Vector3(rb.angularVelocity.x, omega*adherence + rb.angularVelocity.y*(1- adherence), rb.angularVelocity.z);
         Vector3 eulerRotation = transform.rotation.eulerAngles; 
         transform.rotation = Quaternion.Euler(eulerRotation.x, eulerRotation.y, 0);
 
@@ -116,7 +116,7 @@ public class OuiKarel : MonoBehaviour
         deceleration = context.ReadValue<float>();
         if (context.started && rb.velocity.magnitude > derapageSpeed){
             Debug.Log("derape");
-            adherence = OriginalAdherence/2;
+            adherence = 0;
             derape = true;
         }
 
@@ -124,18 +124,5 @@ public class OuiKarel : MonoBehaviour
             derape = false;
             adherence = OriginalAdherence;
         }
-        //Debug.Log( "d = " +deceleration);
     }
-
-
-
-    //context.duration marche po
-
-    // public void Quit(InputAction.CallbackContext context){
-    //     Debug.Log("Quitting");
-    //     if (context.duration > 1){
-    //         Application.Quit();
-    //         Debug.Log("quitOMG");
-    //     }
-    // }
 }
