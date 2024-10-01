@@ -16,6 +16,6 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        speedUI.text = "" + rb.velocity.magnitude;
+        speedUI.text = "" + (int)rb.velocity.magnitude;
     }
 }
