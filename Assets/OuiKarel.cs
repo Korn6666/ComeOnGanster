@@ -25,6 +25,7 @@ public class OuiKarel : MonoBehaviour
     private bool derape;
     [SerializeField] private float derapageSpeedBoost;
     [SerializeField] private float derapageMinSpeed;
+    [SerializeField] private float adhDerapage;
 
     // Frottements
 
@@ -118,7 +119,7 @@ public class OuiKarel : MonoBehaviour
         deceleration = context.ReadValue<float>();
         if (context.started && rb.velocity.magnitude > derapageMinSpeed){
             Debug.Log("derape");
-            adherence = 0;
+            adherence = adhDerapage;
             derape = true;
         }
 
