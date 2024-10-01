@@ -244,13 +244,10 @@ PrefabInstance:
       addedObject: {fileID: 103422807}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db5afbe8ff706db4d823f57f1638555e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 103422806}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db5afbe8ff706db4d823f57f1638555e, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 103422805}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db5afbe8ff706db4d823f57f1638555e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 103422804}
+      addedObject: {fileID: 103422809}
   m_SourcePrefab: {fileID: 100100000, guid: db5afbe8ff706db4d823f57f1638555e, type: 3}
 --- !u!1 &103422802 stripped
 GameObject:
@@ -278,25 +275,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.53012, y: 2.4730268, z: 3.6705017}
   m_Center: {x: -2.443252, y: 0.7365134, z: -0.013828278}
---- !u!114 &103422804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 103422802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24ceb2aa4eea548a4879b27e6d8bcf4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputController: {fileID: 103422806}
-  rb: {fileID: 103422807}
-  maxSpeed: 100
-  derapageSpeed: 0
-  pertesMoteurCoef: -1
-  speedAcceleration: 80
-  omegafactor: 0.7
 --- !u!114 &103422805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,7 +302,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 103422806}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InputController, Assembly-CSharp
         m_MethodName: Rotation
         m_Mode: 0
@@ -348,7 +326,7 @@ MonoBehaviour:
     m_ActionName: Player/X
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 103422806}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InputController, Assembly-CSharp
         m_MethodName: Boost
         m_Mode: 0
@@ -372,7 +350,7 @@ MonoBehaviour:
     m_ActionName: Player/Quit
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 103422806}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InputController, Assembly-CSharp
         m_MethodName: Acceleration
         m_Mode: 0
@@ -388,7 +366,7 @@ MonoBehaviour:
     m_ActionName: Player/Acceleration[/Keyboard/w,/Keyboard/upArrow]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 103422806}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InputController, Assembly-CSharp
         m_MethodName: Deceleration
         m_Mode: 0
@@ -407,25 +385,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &103422806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 103422802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bb4751b75f064cdb82f9a4956ecd23c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputMovement: {x: 0, y: 0}
-  maxteta: 70
-  directionInput: {x: 0, y: 0, z: 0}
-  teta: 0
-  acceleration: 0
-  deceleration: 0
-  boost: 0
 --- !u!54 &103422807
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -453,6 +412,31 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &103422809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103422802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d82df8c25486f64c8249ab1406c190a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 103422807}
+  maxSpeed: 200
+  pertesMoteurCoef: -2
+  speedAcceleration: 150
+  derapageSpeedBoost: 10
+  derapageMinSpeed: 25
+  adhDerapage: 0.075
+  adherence: 1
+  OriginalAdherence: 1
+  frottement: -1
+  omegafactor: 0.7
+  maxteta: 50
+  groundTestRaycast: 0
 --- !u!1 &133485585
 GameObject:
   m_ObjectHideFlags: 0

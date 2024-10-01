@@ -14,6 +14,15 @@ public class FrictionManager : MonoBehaviour
 
 
     void Update(){
+        GroundCheck();
+
+
+        composantTang = Vector3.Dot(rb.velocity, transform.right)* transform.right;
+        Frictions = Vector3.Dot(rb.velocity, transform.forward)*(auSol* frottement *Time.deltaTime)* rb.velocity.normalized;
+    }
+
+    void GroundCheck()
+    {
         int layerMask = 1 << 6;
         groundTestRaycast = Physics.Raycast(transform.position, -Vector2.up, 2, ~layerMask);
         if (groundTestRaycast)
@@ -23,13 +32,10 @@ public class FrictionManager : MonoBehaviour
             //     adherence = OriginalAdherence;
             // }
         }
-        else {
-            adherence =0;
-            auSol =0;
+        else
+        {
+            adherence = 0;
+            auSol = 0;
         }
-        composantTang = Vector3.Dot(rb.velocity, transform.right)* transform.right;
-        Frictions = Vector3.Dot(rb.velocity, transform.forward)*(auSol* frottement *Time.deltaTime)* rb.velocity.normalized;
-
-
     }
 }
