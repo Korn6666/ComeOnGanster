@@ -202,6 +202,17 @@
                 },
                 {
                     "name": "",
+                    "id": "afaddbc3-f945-4456-88c1-6ba9f1ee362f",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "A",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "c93bc978-fd66-4c5a-b0c1-0bc7d248da7d",
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",

@@ -41,11 +41,11 @@ Light:
   m_GameObject: {fileID: 681906319587832980}
   m_Enabled: 1
   serializedVersion: 10
-  m_Type: 1
+  m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.9547169, g: 0.8436558, b: 0.4593449, a: 1}
   m_Intensity: 0.2
-  m_Range: 20
+  m_Range: 5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -83,7 +83,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -104,15 +104,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 09efd1b3d0b239d48bda8c928f64775b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -118
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 09efd1b3d0b239d48bda8c928f64775b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.0623779
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 09efd1b3d0b239d48bda8c928f64775b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 54.95444
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 09efd1b3d0b239d48bda8c928f64775b, type: 3}
       propertyPath: m_LocalRotation.w
