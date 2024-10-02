@@ -15,7 +15,7 @@ public class InputController : MonoBehaviour
     public float acceleration;
     public float deceleration;
     [Header("Boost")]
-    public float boost;
+    public bool boost;
     
     public void Rotation(InputAction.CallbackContext context)
     {
@@ -60,7 +60,8 @@ public class InputController : MonoBehaviour
     }
 
     public void Boost(InputAction.CallbackContext context){
-        boost = context.ReadValue<float>();
+        boost = context.ReadValue<bool>();
+        
         
         Debug.Log(boost);
     }

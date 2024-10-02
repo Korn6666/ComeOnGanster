@@ -49,6 +49,8 @@ public class MovementManager : MonoBehaviour
     
     private float auSol;
 
+    public bool boost;
+
     void Update()
     {
         int layerMask = 1 << 6;
@@ -101,8 +103,8 @@ public class MovementManager : MonoBehaviour
         }
 
 
-        Debug.Log("frottements:" + Frottements);
-        Debug.Log("adh * pertesmoteur:" + adherence*pertesMoteur);
+        //Debug.Log("frottements:" + Frottements);
+        //Debug.Log("adh * pertesmoteur:" + adherence*pertesMoteur);
     }
 
     // Inputs
@@ -149,6 +151,14 @@ public class MovementManager : MonoBehaviour
 
             adherence = OriginalAdherence;
         }
+    }
+
+    public void Boost(InputAction.CallbackContext context)
+    {
+        boost = context.ReadValue<float>() == 1;
+
+
+        //Debug.Log(boost);
     }
 
     private IEnumerator IsItALongDerapage(){
