@@ -24,16 +24,21 @@ public class MovementManager : MonoBehaviour
 
     [Header("DERAPAGE")]
     // Derapage
-    private bool derape;
+    static public bool derape;
     [SerializeField] private float derapageSpeedBoost;
     [SerializeField] private float derapageMinSpeed;
     [SerializeField] private float adhDerapage;
     [SerializeField] private float longDerapageTimer;
+    [SerializeField] private GameObject derapageParticles;
+    [SerializeField] private List<Transform> listRoues;
+
+    private List<GameObject> listParticles;
     private bool longDerapage;
 
-    [Header("Frottements")]
+    [Header("Frottements et adherence")]
     // Frottements
     [SerializeField] private float adherence;
+    [SerializeField] private float adhModifier;
     [SerializeField] private float OriginalAdherence;
     [SerializeField] private float frottement;
 
@@ -59,7 +64,7 @@ public class MovementManager : MonoBehaviour
         {
             auSol = 1;
             if (!derape){
-                adherence = OriginalAdherence;
+                adherence = adhModifier/(adhModifier+rb.angularVelocity.magnitude);
             }
         }
         else {
@@ -76,6 +81,7 @@ public class MovementManager : MonoBehaviour
             //si on veut pimp le dérapage
 
         }
+
 
         // Angle
         omega = omegafactor*rb.velocity.magnitude * Mathf.Sin(teta * Mathf.Deg2Rad) * inputMovement.magnitude  / (2 * Mathf.PI * transform.localScale.z);
@@ -126,10 +132,6 @@ public class MovementManager : MonoBehaviour
     {
         acceleration = context.ReadValue<float>();
 
-        if (derape && acceleration > 0) {
-            derape = false;
-            adherence = OriginalAdherence;
-        }
     }
 
     public void Deceleration(InputAction.CallbackContext context)
@@ -139,6 +141,15 @@ public class MovementManager : MonoBehaviour
             Debug.Log("derape");
             adherence = adhDerapage;
             derape = true;
+
+            if (auSol == 1){
+                foreach (Transform roue in listRoues){
+
+                    roue.GetChild(0).gameObject.SetActive(true);
+                    
+            }
+            }
+
             StartCoroutine("IsItALongDerapage");
         }
 
@@ -146,8 +157,16 @@ public class MovementManager : MonoBehaviour
 
             if (longDerapage){
                 rb.velocity+= transform.forward*derapageSpeedBoost*auSol;
+                longDerapage = false;
             }
-            derape = false;
+            if (derape){
+                derape = false;
+                foreach (Transform roue in listRoues){
+                    roue.GetChild(0).gameObject.SetActive(false);
+                  
+            }       
+            }
+            
 
             adherence = OriginalAdherence;
         }
@@ -156,7 +175,12 @@ public class MovementManager : MonoBehaviour
     public void Boost(InputAction.CallbackContext context)
     {
         boost = context.ReadValue<float>() == 1;
-
+        if (context.started){
+            transform.GetChild(0).gameObject.SetActive(true);
+        }
+        if (context.canceled){
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
 
         //Debug.Log(boost);
     }
@@ -166,5 +190,9 @@ public class MovementManager : MonoBehaviour
         if (derape){
             longDerapage = true;
         }
+        else {
+            longDerapage = false;
+        }
     }
+
 }
