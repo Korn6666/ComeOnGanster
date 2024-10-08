@@ -21,18 +21,28 @@ public class Boost : MonoBehaviour
     [SerializeField] private float boostSpeed;
     [SerializeField] private Slider boostSlider;
 
+    [SerializeField] private GameObject boostParticles;
     private void Start()
     {
         boostSlider.maxValue = maxBoost;
         boostValue = maxBoost;
         isCooldown = false;
-
     }
     private void Update()
     {
         //UI
         boostSlider.value = boostValue;
+        //Effets
+        if (isBoosting) {
+            boostParticles.SetActive(true);
+        }
 
+        else {
+            boostParticles.SetActive(false);
+        }
+           
+        
+    
         //Calculs
         currentSpeed = Vector3.Dot(rb.velocity, transform.forward);
         if (movementManager.boost && boostValue > 0 && !isCooldown)
@@ -69,4 +79,8 @@ public class Boost : MonoBehaviour
         yield return new WaitForSeconds(boostCooldown);
         isCooldown = false;
     }
+
+
+
+
 }
