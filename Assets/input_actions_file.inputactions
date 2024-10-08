@@ -235,6 +235,17 @@
                 },
                 {
                     "name": "",
+                    "id": "91231e15-00c1-4799-8634-7a83f7a60b5e",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "B",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "4375d7b6-799d-4d21-95db-0cb9f1359d17",
                     "path": "<Gamepad>/start",
                     "interactions": "",
@@ -284,17 +295,6 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Frein",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "aeb3b56f-a08f-4a54-baa1-0f84c648f7d9",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
                     "action": "Frein",
                     "isComposite": false,
                     "isPartOfComposite": false

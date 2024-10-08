@@ -47,7 +47,7 @@ public class MovementManager : MonoBehaviour
     private float omega;
     [SerializeField] private float omegafactor;
     private Vector3 rotation;
-    [SerializeField] private float maxteta;
+    public float maxteta; //Write by Boost.cs
 
     // Grounded?
     private bool groundTestRaycast;
@@ -55,6 +55,9 @@ public class MovementManager : MonoBehaviour
     private float auSol;
 
     public bool boost;
+    private float derapage;
+    float speedBeforeDerapage = 0;
+
 
     void Update()
     {
@@ -84,7 +87,11 @@ public class MovementManager : MonoBehaviour
 
 
         // Angle
-        omega = omegafactor*rb.velocity.magnitude * Mathf.Sin(teta * Mathf.Deg2Rad) * inputMovement.magnitude  / (2 * Mathf.PI * transform.localScale.z);
+        omega = omegafactor* rb.velocity.magnitude * Mathf.Sin(teta * Mathf.Deg2Rad) * inputMovement.magnitude  / (2 * Mathf.PI * transform.localScale.z);
+        if (Vector3.Dot(rb.velocity, transform.forward) < 0)
+        {
+            omega = -omega;
+        }
         rb.angularVelocity = new Vector3(rb.angularVelocity.x, omega*adherence + rb.angularVelocity.y*(1- adherence), rb.angularVelocity.z);
 
         // Pas d'histoire de rotation en z et ça évite d'etre bloqué à l'envers 
@@ -93,6 +100,10 @@ public class MovementManager : MonoBehaviour
 
         // Vitesse
         float motorAccel = (acceleration - deceleration) * speedAcceleration*Time.deltaTime;
+        if (motorAccel * Vector3.Dot(rb.velocity, transform.forward) < 0)
+        {
+            motorAccel *= 5;
+        }
 
         Vector3 composantMoteurForward = (motorAccel)* transform.forward;
         Vector3 composantForward = Vector3.Dot(rb.velocity, transform.forward) * transform.forward;
@@ -137,36 +148,52 @@ public class MovementManager : MonoBehaviour
     public void Deceleration(InputAction.CallbackContext context)
     {
         deceleration = context.ReadValue<float>();
-        if (context.started && rb.velocity.magnitude > derapageMinSpeed){
+    }
+
+    public void Derapage(InputAction.CallbackContext context)
+    {
+        derapage = context.ReadValue<float>();
+        if (context.started && rb.velocity.magnitude > derapageMinSpeed)
+        {
             Debug.Log("derape");
             adherence = adhDerapage;
+            speedBeforeDerapage = rb.velocity.magnitude;
+            Debug.Log("Avant derape: " + speedBeforeDerapage);
             derape = true;
 
-            if (auSol == 1){
-                foreach (Transform roue in listRoues){
+            if (auSol == 1)
+            {
+                foreach (Transform roue in listRoues)
+                {
 
                     roue.GetChild(0).gameObject.SetActive(true);
-                    
-            }
+
+                }
             }
 
             StartCoroutine("IsItALongDerapage");
         }
 
-        if (context.canceled) {
+        if (context.canceled)
+        {
 
-            if (longDerapage){
-                rb.velocity+= transform.forward*derapageSpeedBoost*auSol;
+            if (longDerapage)
+            {
+                Debug.Log("Apres derape: " + speedBeforeDerapage);
+
+
+                rb.velocity += transform.forward * 0.5f* speedBeforeDerapage * auSol;
                 longDerapage = false;
             }
-            if (derape){
+            if (derape)
+            {
                 derape = false;
-                foreach (Transform roue in listRoues){
+                foreach (Transform roue in listRoues)
+                {
                     roue.GetChild(0).gameObject.SetActive(false);
-                  
-            }       
+                }
             }
-            
+
 
             adherence = OriginalAdherence;
         }

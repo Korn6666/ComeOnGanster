@@ -19,11 +19,13 @@ public class Boost : MonoBehaviour
     private float currentSpeed;
     private float boostValue;
     [SerializeField] private Slider boostSlider;
+
     private void Start()
     {
         boostSlider.maxValue = maxBoost;
         boostValue = maxBoost;
         isCooldown = false;
+
     }
     private void Update()
     {
@@ -65,5 +67,4 @@ public class Boost : MonoBehaviour
         yield return new WaitForSeconds(boostCooldown);
         isCooldown = false;
     }
-
 }
