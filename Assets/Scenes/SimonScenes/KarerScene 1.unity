@@ -13276,6 +13276,10 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2516131669122777091, guid: 2aa95f5c3db9a6441809a0b0bf304f57, type: 3}
+      propertyPath: derapageBoostFactor
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2516131669122777091, guid: 2aa95f5c3db9a6441809a0b0bf304f57, type: 3}
       propertyPath: listRoues.Array.size
       value: 4
       objectReference: {fileID: 0}

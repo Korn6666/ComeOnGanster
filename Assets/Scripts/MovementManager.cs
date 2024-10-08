@@ -25,7 +25,7 @@ public class MovementManager : MonoBehaviour
     [Header("DERAPAGE")]
     // Derapage
     static public bool derape;
-    [SerializeField] private float derapageSpeedBoost;
+    [SerializeField] private float derapageBoostFactor;
     [SerializeField] private float derapageMinSpeed;
     [SerializeField] private float adhDerapage;
     [SerializeField] private float longDerapageTimer;
@@ -182,7 +182,7 @@ public class MovementManager : MonoBehaviour
                 Debug.Log("Apres derape: " + speedBeforeDerapage);
 
 
-                rb.velocity += transform.forward * 0.5f* speedBeforeDerapage * auSol;
+                rb.velocity += transform.forward * derapageBoostFactor* speedBeforeDerapage * auSol;
                 longDerapage = false;
             }
             if (derape)
