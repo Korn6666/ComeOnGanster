@@ -13261,7 +13261,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2516131669122777091, guid: 2aa95f5c3db9a6441809a0b0bf304f57, type: 3}
       propertyPath: pertesMoteurCoef
-      value: -0.1
+      value: -0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2516131669122777091, guid: 2aa95f5c3db9a6441809a0b0bf304f57, type: 3}
       propertyPath: derapageParticles
@@ -13277,7 +13277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2516131669122777091, guid: 2aa95f5c3db9a6441809a0b0bf304f57, type: 3}
       propertyPath: derapageBoostFactor
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2516131669122777091, guid: 2aa95f5c3db9a6441809a0b0bf304f57, type: 3}
       propertyPath: listRoues.Array.size
@@ -28786,7 +28786,8 @@ MonoBehaviour:
   maxBoost: 10
   speedBoostReload: 0.5
   speedBoostConsume: 5
-  boostCooldown: 0
+  boostCooldown: 2
+  boostSpeed: 50
   boostSlider: {fileID: 1307646095}
 --- !u!1001 &1606676341
 PrefabInstance:

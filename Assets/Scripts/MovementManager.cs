@@ -155,10 +155,8 @@ public class MovementManager : MonoBehaviour
         derapage = context.ReadValue<float>();
         if (context.started && rb.velocity.magnitude > derapageMinSpeed)
         {
-            Debug.Log("derape");
             adherence = adhDerapage;
             speedBeforeDerapage = rb.velocity.magnitude;
-            Debug.Log("Avant derape: " + speedBeforeDerapage);
             derape = true;
 
             if (auSol == 1)
@@ -179,10 +177,7 @@ public class MovementManager : MonoBehaviour
 
             if (longDerapage)
             {
-                Debug.Log("Apres derape: " + speedBeforeDerapage);
-
-
-                rb.velocity += transform.forward * derapageBoostFactor* speedBeforeDerapage * auSol;
+                rb.velocity = transform.forward * derapageBoostFactor* speedBeforeDerapage * auSol;
                 longDerapage = false;
             }
             if (derape)

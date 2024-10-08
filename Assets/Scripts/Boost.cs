@@ -18,6 +18,7 @@ public class Boost : MonoBehaviour
 
     private float currentSpeed;
     private float boostValue;
+    [SerializeField] private float boostSpeed;
     [SerializeField] private Slider boostSlider;
 
     private void Start()
@@ -38,6 +39,7 @@ public class Boost : MonoBehaviour
         {
             isBoosting = true;
             boostValue -= Time.deltaTime * speedBoostConsume;
+            Debug.Log("boost");
         }else if (boostValue < 0)
         {
             StartCoroutine(BoostCoolDown());
@@ -57,7 +59,7 @@ public class Boost : MonoBehaviour
 
         if (isBoosting)
         {
-            rb.velocity += currentSpeed * boostMultiplier * transform.forward*Time.deltaTime;
+            rb.velocity += boostSpeed * transform.forward*Time.deltaTime;
         }
     }
 
