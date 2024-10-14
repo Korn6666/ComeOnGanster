@@ -4,6 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: a0a9b8930b4c3f548becc4ad01e70503
+  - enabled: 1
+    path: Assets/Scenes/KarerScene.unity
+    guid: 2418d976c73cf9748a17cd976c9eadd8
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 35383525d7b44fd43b7bb7ac2ea26a5b, type: 2}
