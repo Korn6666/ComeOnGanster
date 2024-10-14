@@ -7,12 +7,10 @@ public class FeuScript : MonoBehaviour
     [SerializeField] private Color onMaterial;
     [SerializeField] private Color offMaterial;
     [SerializeField] List<GameObject> feuxOrdonnes;
-
     [SerializeField] private GameObject player;
 
     void turnOn(GameObject go){
         go.GetComponent<Renderer>().material.color = onMaterial;
-        Debug.Log("oui");
     }
 
     void turnOff(GameObject go){
@@ -35,7 +33,6 @@ public class FeuScript : MonoBehaviour
 
         player.GetComponent<MovementManager>().enabled = true;
         player.GetComponent<Boost>().enabled = true;
-
     }
 
 
