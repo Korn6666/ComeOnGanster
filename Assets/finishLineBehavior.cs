@@ -16,10 +16,10 @@ public class finishLineBehavior : MonoBehaviour
     }
 
     void Update(){
-        Debug.Log("oui");
+        //Debug.Log("oui");
         if(nLaps > 0) {
             lapTime += Time.deltaTime;
-            Debug.Log(lapTime);
+            //Debug.Log(lapTime);
             speedUI.text = "" + lapTime;
         }
 
