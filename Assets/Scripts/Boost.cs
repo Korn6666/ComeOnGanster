@@ -80,7 +80,12 @@ public class Boost : MonoBehaviour
         isCooldown = false;
     }
 
-
-
-
+    public void BoostReset()
+    {
+        Debug.Log("reset boost");
+        boostSlider.maxValue = maxBoost;
+        boostSlider.value = maxBoost;
+        boostValue = maxBoost;
+        isCooldown = false;
+    }
 }

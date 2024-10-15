@@ -18,21 +18,37 @@ public class FeuScript : MonoBehaviour
     }
 
     public IEnumerator StartSequence() {
-        foreach(GameObject go in feuxOrdonnes){
+        // Eteint tout les feux
+        foreach (GameObject go in feuxOrdonnes)
+        {
+            turnOff(go);
+        }
+
+        // Joueur off
+        player.GetComponent<MovementManager>().enabled = false;
+        player.GetComponent<Boost>().enabled = false;
+
+        //Allume les feux au fur et à mesure
+        foreach (GameObject go in feuxOrdonnes){
             turnOn(go);
             yield return new WaitForSeconds(1f);
             
         }
-        foreach(GameObject go in feuxOrdonnes){
+        //Eteint tout les feux
+        foreach (GameObject go in feuxOrdonnes){
             turnOff(go);
         }
+        //Allume tout les feux au bout de 0.2 secondes
         yield return new WaitForSeconds(0.2f);
         foreach(GameObject go in feuxOrdonnes){
             turnOn(go);
         }
 
+        //Joueur on
         player.GetComponent<MovementManager>().enabled = true;
         player.GetComponent<Boost>().enabled = true;
+
+
     }
 
 
