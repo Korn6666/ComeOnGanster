@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] InputController inputController;
     //Voiture
     [SerializeField] private Rigidbody rb;
 
@@ -24,17 +23,10 @@ public class Movement : MonoBehaviour
     private float teta;
     private Vector3 inputMovement;
     //Adherence
-    [SerializeField] FrictionManager frictionManager;
     private float adherence;
 
     void Update()
     {
-        teta = inputController.teta;
-        inputMovement = inputController.inputMovement;
-        acceleration = inputController.acceleration;
-        deceleration = inputController.deceleration;
-        adherence = frictionManager.adherence;
-
         Rotation();
         Motor();
     }
