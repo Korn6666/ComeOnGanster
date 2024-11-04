@@ -36,7 +36,7 @@ public class finishLineBehavior : MonoBehaviour
         {
             // turnTimers
             turnTimers.Add(lapTime);
-            turnTimersUI.text += "Turn" + turnTimers.Count + ": " + lapTime + "<br>";
+            turnTimersUI.text += "Turn" + turnTimers.Count + ": " + lapTime.ToString("0.00") + "<br>";
         }
 
         //Incrémentation si carPassedCheckPoint. Au nLaps = 0, il est déjà initialisé à true
@@ -53,7 +53,7 @@ public class finishLineBehavior : MonoBehaviour
             if (lapTime < bestLapTime)
             {
                 bestLapTime = lapTime;
-                bestTimerUI.text = "Record: " + bestLapTime;
+                bestTimerUI.text = "Record: " + bestLapTime.ToString("0.00");
             }
             lapTime = 0;
             nLaps = 0;
@@ -76,7 +76,7 @@ public class finishLineBehavior : MonoBehaviour
         if(nLaps > 0) {
             lapTime += Time.deltaTime;
             //Debug.Log(lapTime);
-            timerUI.text = "Timer: " + lapTime;
+            timerUI.text = "Timer: " + lapTime.ToString("0.00");
         }
     }
 }
