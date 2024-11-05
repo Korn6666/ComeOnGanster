@@ -8,7 +8,7 @@ public class FeuScript : MonoBehaviour
     [SerializeField] private Color offMaterial;
     [SerializeField] List<GameObject> feuxOrdonnes;
     [SerializeField] private GameObject player;
-
+    [SerializeField] private GameObject startUI;
     void turnOn(GameObject go){
         go.GetComponent<Renderer>().material.color = onMaterial;
     }
@@ -28,7 +28,7 @@ public class FeuScript : MonoBehaviour
         player.GetComponent<MovementManager>().enabled = false;
         player.GetComponent<Boost>().enabled = false;
 
-        //Allume les feux au fur et à mesure
+        //Allume les feux au fur et ï¿½ mesure
         foreach (GameObject go in feuxOrdonnes){
             turnOn(go);
             yield return new WaitForSeconds(1f);
@@ -47,7 +47,7 @@ public class FeuScript : MonoBehaviour
         //Joueur on
         player.GetComponent<MovementManager>().enabled = true;
         player.GetComponent<Boost>().enabled = true;
-
+        startUI.SetActive(true);
 
     }
 

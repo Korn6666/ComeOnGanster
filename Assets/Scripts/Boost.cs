@@ -33,7 +33,7 @@ public class Boost : MonoBehaviour
         //UI
         boostSlider.value = boostValue;
         //Effets
-        if (isBoosting) {
+        if (isBoosting && movementManager.feedbacks) {
             boostParticles.SetActive(true);
         }
 

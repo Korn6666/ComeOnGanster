@@ -49,6 +49,15 @@ public class MovementManager : MonoBehaviour
     private Vector3 rotation;
     public float maxteta; //Write by Boost.cs
 
+    [SerializeField] private float omegaMaxFactor;
+
+    [SerializeField] private Transform roueAvantG;
+    [SerializeField] private Transform roueAvantD;
+
+    [Header("Feedbacks")]
+
+    [SerializeField] public bool feedbacks;
+
     // Grounded?
     private bool groundTestRaycast;
     
@@ -88,6 +97,7 @@ public class MovementManager : MonoBehaviour
 
         // Angle
         omega = omegafactor* rb.velocity.magnitude * Mathf.Sin(teta * Mathf.Deg2Rad) * inputMovement.magnitude  / (2 * Mathf.PI * transform.localScale.z);
+
         if (Vector3.Dot(rb.velocity, transform.forward) < 0)
         {
             omega = -omega;
@@ -136,6 +146,7 @@ public class MovementManager : MonoBehaviour
             teta = maxteta;
         else if (teta < -maxteta)
             teta = -maxteta;
+
     }
 
 
@@ -167,7 +178,7 @@ public class MovementManager : MonoBehaviour
             speedBeforeDerapage = rb.velocity.magnitude;
             derape = true;
 
-            if (auSol == 1)
+            if (auSol == 1 && feedbacks)
             {
                 foreach (Transform roue in listRoues)
                 {
@@ -205,7 +216,7 @@ public class MovementManager : MonoBehaviour
     public void Boost(InputAction.CallbackContext context)
     {
         boost = context.ReadValue<float>() == 1;
-        if (context.started){
+        if (context.started && feedbacks){
             transform.GetChild(0).gameObject.SetActive(true);
         }
         if (context.canceled){
@@ -223,6 +234,10 @@ public class MovementManager : MonoBehaviour
         else {
             longDerapage = false;
         }
+    }
+
+    public void setFeedbacks(bool a){
+        feedbacks = a;
     }
 
 }
