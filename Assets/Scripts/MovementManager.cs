@@ -142,12 +142,20 @@ public class MovementManager : MonoBehaviour
     public void Acceleration(InputAction.CallbackContext context)
     {
         acceleration = context.ReadValue<float>();
+        if (acceleration > 0.3f)
+        {
+            acceleration = 1;
+        }
 
     }
 
     public void Deceleration(InputAction.CallbackContext context)
     {
         deceleration = context.ReadValue<float>();
+        if (deceleration > 0.3f)
+        {
+            //deceleration = 1;
+        }
     }
 
     public void Derapage(InputAction.CallbackContext context)
