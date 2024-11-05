@@ -48,7 +48,8 @@ public class FeuScript : MonoBehaviour
         player.GetComponent<MovementManager>().enabled = true;
         player.GetComponent<Boost>().enabled = true;
         startUI.SetActive(true);
-
+        yield return new WaitForSeconds(1);
+        startUI.SetActive(false);
     }
 
 
